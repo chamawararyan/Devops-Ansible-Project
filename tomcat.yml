@@ -1,0 +1,30 @@
+- hosts: all
+  tasks:
+    - name: Download Tomcat from dlcdn
+      get_url:
+        url: "wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.104/bin/apache-tomcat-9.0.104.tar.gz"
+        dest: "/root/"
+
+
+    - name: Untar the apache file
+      command: tar -zxvf apache-tomcat-9.0.104.tar.gz
+
+    - name: Rename the Tomcat
+      command: mv apache-tomcat-9.0.104 tomcat
+      tags: abc
+
+    - name: Install Java
+      command: yum install java-1.8.0-openjdk -y
+
+    - name: setting the roles in tomcat-user.xml file
+      template:
+        src: tomcat-users.xml
+        dest: /root/tomcat/conf/tomcat-users.xml
+
+    - name: Delete teo lines in context.xml
+      template:
+        src: context.xml
+        dest: /root/tomcat/webapps/manager/META-INF/context.xml
+
+    - name: Start the tomcat
+      shell: nohup /root/tomcat/bin/startup.sh
