@@ -1,0 +1,6 @@
+- hosts: all
+  tasks:
+    - name: copying the Artifact
+      copy:
+        src: /var/lib/jenkins/workspace/ansible-job/target/NETFLIX-1.2.2.war
+        dest: /root/tomcat/webapps
