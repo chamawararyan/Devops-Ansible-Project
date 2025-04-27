@@ -4,7 +4,7 @@ provider "aws" {
 
 # First group of instances
 variable "instance_names_one" {
-  default = ["jenkins", "Monitoring-Server"]
+  default = ["jenkins", "Monitoring-Server","Nexus"]
 }
 
 resource "aws_instance" "infra_1" {
